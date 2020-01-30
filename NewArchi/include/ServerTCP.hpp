@@ -5,9 +5,7 @@
 #ifndef                     HANDS_FREE_SERVERTCP_HPP
 #define                     HANDS_FREE_SERVERTCP_HPP
 
-#include                    <sys/types.h>
 #include                    <arpa/inet.h>
-#include                    <netinet/in.h>
 #include                    "ServerSocket.hpp"
 
 typedef struct sockaddr_in SOCKADDR_IN;

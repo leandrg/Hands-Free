@@ -29,11 +29,11 @@ bool            Socket::fdIsSet(const fd_set *value) const {
 
 std::string     Socket::read() const {
     std::string stringBuffer = "";
-    char buffer[MAX_BUFF_SIZE + 1];
+    char buffer[MAX_BUFF_SIZE + 1] = {0};
     int size;
 
     size = ::read(this->_socket, buffer, MAX_BUFF_SIZE);
-    buffer[size > 0 ? size : 0] = '\0';
+    (void)size;
     return (std::string(buffer));
 }
 

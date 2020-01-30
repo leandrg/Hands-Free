@@ -8,7 +8,7 @@
 #include            <stdio.h>
 #include            <unistd.h>
 #include            <sys/socket.h>
-#import             <string>
+#include            <string>
 
 typedef int         SOCKET;
 #define MAX_BUFF_SIZE 4096

@@ -5,7 +5,7 @@
 #ifndef HANDS_FREE_CLIENTSOCKET_HPP
 #define HANDS_FREE_CLIENTSOCKET_HPP
 
-#import                 "Socket.hpp"
+#include                "Socket.hpp"
 
 class                   ClientSocket: public Socket {
     std::string          _stringId;

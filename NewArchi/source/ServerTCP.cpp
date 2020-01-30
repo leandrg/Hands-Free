@@ -30,13 +30,13 @@ ClientSocket            *ServerTCP::accept() {
     SOCKET              newSocket;
     ClientSocket        *tmpClient;
     char                *tmpIP;
+
     size = sizeof(sockaddrIn);
     newSocket = ::accept(this->_socket, (SOCKADDR*)&sockaddrIn, &size);
     if (newSocket == -1)
         return NULL;
     tmpIP = inet_ntoa(sockaddrIn.sin_addr);
     tmpClient = new ClientSocket(newSocket, tmpIP);
-//    free(tmpIP);
     return tmpClient;
 }
 
