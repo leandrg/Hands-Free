@@ -8,7 +8,7 @@ int main() {
     ServerHFP hfp = ServerHFP();
     hfp.start();
     std::cout << hfp.getServerName() << std::endl;
-//    hfp.listen();
+    hfp.listen();
     hfp.stop();
     return 0;
 }

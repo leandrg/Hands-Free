@@ -35,7 +35,7 @@ void                SdpHFP::registerRecord(uint8_t channel) { //TODO OMG sdp_lis
     sdp_uuid16_create(&handFreeServiceClassID, HANDSFREE_SVCLASS_ID);
     sdp_uuid16_create(&genericAudioServiceClassID, GENERIC_AUDIO_SVCLASS_ID);
     classList = sdp_list_append(0, &handFreeServiceClassID);
-    sdp_list_append(classList, &handFreeServiceClassID);
+    sdp_list_append(classList, &genericAudioServiceClassID);
 
     //INIT Protocol List
     sdp_uuid16_create(&l2capID, L2CAP_UUID);
