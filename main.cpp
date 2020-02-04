@@ -2,12 +2,13 @@
 // Created by Gaëtan Léandre on 30/01/2020.
 //
 
-#include       "ServerTCP.hpp"
+#include       "ServerHFP.hpp"
 
 int main() {
-    ServerTCP tcp = ServerTCP(8083);
-    tcp.start();
-    tcp.listen();
-    tcp.stop();
+    ServerHFP hfp = ServerHFP();
+    hfp.start();
+    std::cout << hfp.getServerName() << std::endl;
+//    hfp.listen();
+    hfp.stop();
     return 0;
 }

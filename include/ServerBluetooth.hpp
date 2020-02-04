@@ -7,6 +7,8 @@
 
 #include                    <bluetooth/bluetooth.h>
 #include                    <bluetooth/rfcomm.h>
+#include                    <bluetooth/hci.h>
+#include                    <bluetooth/hci_lib.h>
 #include                    <arpa/inet.h>
 #include                    "ServerSocket.hpp"
 
@@ -14,9 +16,12 @@ typedef struct sockaddr_rc  SOCKADDR_RC;
 typedef struct sockaddr     SOCKADDR;
 
 class                       ServerBluetooth : public ServerSocket {
+    uint8_t                 _channel;
+
 public:
-    ServerBluetooth(int maxClients = 1);
+    ServerBluetooth(uint8_t channel = 1, int maxClients = 1);
     ~ServerBluetooth();
+    const std::string       getServerName() const;
 
 protected:
     virtual void            socket();

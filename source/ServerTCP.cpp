@@ -28,16 +28,12 @@ ClientSocket            *ServerTCP::accept() {
     SOCKADDR_IN         sockaddrIn;
     socklen_t           size;
     SOCKET              newSocket;
-    ClientSocket        *tmpClient;
-    char                *tmpIP;
 
     size = sizeof(sockaddrIn);
     newSocket = ::accept(this->_socket, (SOCKADDR*)&sockaddrIn, &size);
     if (newSocket == -1)
         return NULL;
-    tmpIP = inet_ntoa(sockaddrIn.sin_addr);
-    tmpClient = new ClientSocket(newSocket, tmpIP);
-    return tmpClient;
+    return new ClientSocket(newSocket, inet_ntoa(sockaddrIn.sin_addr));
 }
 
 void                    ServerTCP::actionClient(ClientSocket *client, std::string data) {
