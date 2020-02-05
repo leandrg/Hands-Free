@@ -13,7 +13,7 @@ class SdpHFP : public Sdp {
     std::string     _serviceDescription;
 
 public:
-    SdpHFP(std::string serviceName = "HandFree", std::string serviceProvider = "leandrg", std::string serviceDescription = "");
+    SdpHFP(std::string const &serviceName = "HandFree", std::string const &serviceProvider = "leandrg", std::string const &serviceDescription = "");
     ~SdpHFP();
     void            registerRecord(uint8_t channel);
 };

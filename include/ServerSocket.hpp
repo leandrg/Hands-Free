@@ -8,8 +8,9 @@
 #include            <list>
 #include            <iostream>
 #include            "ClientSocket.hpp"
+#include            "CommandParser.hpp"
 
-class               ServerSocket : public Socket {
+class               ServerSocket : public Socket, public CommandParser {
     bool            _started;
     int             _maxClients;
     std::list<ClientSocket*>      _clients;

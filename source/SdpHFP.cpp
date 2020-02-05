@@ -5,7 +5,7 @@
 #include            "SdpHFP.hpp"
 
 
-SdpHFP::SdpHFP(std::string serviceName, std::string serviceProvider, std::string serviceDescription) {
+SdpHFP::SdpHFP(std::string const &serviceName, std::string const &serviceProvider, std::string const &serviceDescription) {
     this->_serviceName = serviceName;
     this->_serviceProvider = serviceProvider;
     this->_serviceDescription = serviceDescription;

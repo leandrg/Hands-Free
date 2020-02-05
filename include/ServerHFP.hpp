@@ -11,6 +11,7 @@
 class ServerHFP : public ServerBluetooth, protected SdpHFP {
 
 public:
+    void test(std::string const &hum);
     ServerHFP(uint8_t channel = 1);
     ~ServerHFP();
 };
