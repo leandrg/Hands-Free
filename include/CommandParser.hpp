@@ -13,7 +13,6 @@ template<typename T>
 using ActionFunction = void (T::*)(std::string const &str);
 
 class                   CommandParser {
-
     class                   CommandParent {
     public:
         virtual ~CommandParent(){};
@@ -42,11 +41,11 @@ public:
     ~CommandParser();
 
     template <class T>
-            void addCommand(T &context, std::string key, ActionFunction<T> f) {
+            void        addCommand(T &context, std::string key, ActionFunction<T> f) {
+                this->removeCommand(key);
                 Command<T> *tmp = new CommandParser::Command<T>(context, f);
                 this->_mapCommands[key] = tmp;
-            }
-
+            };
     void                removeCommand(std::string const &key);
     void                removeAllCommands();
     bool                parseCommand(std::string const &str);
