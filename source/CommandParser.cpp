@@ -32,10 +32,11 @@ void                CommandParser::removeAllCommands() {
     }
 }
 
-bool                CommandParser::parseCommand(std::string const &str) {
+bool                CommandParser::parseCommand(ClientSocket *client, std::string const &str) {
     //TODO get key
     std::unordered_map<std::string, CommandParser::CommandParent*>::iterator it = this->_mapCommands.find(str);
 
+    (void)client;
     if (it != this->_mapCommands.end()) {
         it->second->launch(str);
         return true;

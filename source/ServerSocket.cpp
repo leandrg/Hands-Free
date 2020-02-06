@@ -97,3 +97,7 @@ void            ServerSocket::receiveClient(fd_set value) {
         }
     }
 }
+
+ClientSocket    *ServerSocket::createClient(SOCKET newSocket, std::string const & name) {
+    return new ClientSocket(newSocket, name);
+}

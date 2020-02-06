@@ -8,9 +8,10 @@
 #include                <string>
 #include                <iostream>
 #include                <unordered_map>
+#include                "ClientSocket.hpp"
 
 template<typename T>
-using ActionFunction = void (T::*)(std::string const &str);
+using ActionFunction = void (T::*)(ClientSocket *clientSocket, std::string const &str);
 
 class                   CommandParser {
     class                   CommandParent {
@@ -48,7 +49,7 @@ public:
             };
     void                removeCommand(std::string const &key);
     void                removeAllCommands();
-    bool                parseCommand(std::string const &str);
+    bool                parseCommand(ClientSocket *client, std::string const &str);
 };
 
 

@@ -33,7 +33,7 @@ ClientSocket            *ServerTCP::accept() {
     newSocket = ::accept(this->_socket, (SOCKADDR*)&sockaddrIn, &size);
     if (newSocket == -1)
         return NULL;
-    return new ClientSocket(newSocket, inet_ntoa(sockaddrIn.sin_addr));
+    return this->createClient(newSocket, inet_ntoa(sockaddrIn.sin_addr));
 }
 
 void                    ServerTCP::actionClient(ClientSocket *client, std::string data) {

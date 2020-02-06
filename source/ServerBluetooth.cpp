@@ -45,15 +45,13 @@ ClientSocket            *ServerBluetooth::accept() {
     SOCKET              newSocket;
     socklen_t		    size;
     char                tmpName[1024] = {0};
-    ClientSocket        *tmpClient;
 
     size = sizeof(sock_addr);
     newSocket = ::accept(this->_socket, (SOCKADDR *)&sock_addr, &size);
     if (newSocket == -1)
         return NULL;
     ba2str(&sock_addr.rc_bdaddr, tmpName);
-    tmpClient = new ClientSocket(newSocket, tmpName);
-    return tmpClient;
+    return this->createClient(newSocket, tmpName);
 }
 
 void                    ServerBluetooth::actionClient(ClientSocket *client, std::string data) {
