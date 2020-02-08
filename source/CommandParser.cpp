@@ -12,7 +12,7 @@ CommandParser::~CommandParser() {
 }
 
 void                CommandParser::removeCommand(std::string const &key) {
-    std::unordered_map<std::string, CommandParser::CommandParent*>::iterator it = this->_mapCommands.find(key);
+    std::unordered_map<std::string, CommandParent*>::iterator it = this->_mapCommands.find(key);
 
     if (it != this->_mapCommands.end()) {
         delete it->second;
@@ -21,11 +21,11 @@ void                CommandParser::removeCommand(std::string const &key) {
 }
 
 void                CommandParser::removeAllCommands() {
-    std::unordered_map<std::string, CommandParser::CommandParent*>::iterator it = this->_mapCommands.begin();
+    std::unordered_map<std::string, CommandParent*>::iterator it = this->_mapCommands.begin();
 
     while (it != this->_mapCommands.end())
     {
-        std::unordered_map<std::string, CommandParser::CommandParent*>::iterator tmp = it;
+        std::unordered_map<std::string, CommandParent*>::iterator tmp = it;
         it++;
         delete tmp->second;
         this->_mapCommands.erase(tmp->first);
@@ -34,11 +34,10 @@ void                CommandParser::removeAllCommands() {
 
 bool                CommandParser::parseCommand(ClientSocket *client, std::string const &str) {
     //TODO get key
-    std::unordered_map<std::string, CommandParser::CommandParent*>::iterator it = this->_mapCommands.find(str);
+    std::unordered_map<std::string, CommandParent*>::iterator it = this->_mapCommands.find(str);
 
-    (void)client;
     if (it != this->_mapCommands.end()) {
-        it->second->launch(str);
+        it->second->launch(client, str);
         return true;
     }
     return false;

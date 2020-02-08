@@ -81,6 +81,7 @@ void            ServerSocket::addClient() {
     }
     std::cout << "New client : " << client->getStringId() << std::endl;
     this->_clients.push_back(client);
+    this->onClientConnect(client);
 }
 
 void            ServerSocket::receiveClient(fd_set value) {
@@ -100,4 +101,8 @@ void            ServerSocket::receiveClient(fd_set value) {
 
 ClientSocket    *ServerSocket::createClient(SOCKET newSocket, std::string const & name) {
     return new ClientSocket(newSocket, name);
+}
+
+void            ServerSocket::onClientConnect(ClientSocket *client) {
+    (void)client;
 }

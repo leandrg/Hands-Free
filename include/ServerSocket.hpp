@@ -33,6 +33,7 @@ protected:
     virtual ClientSocket *accept() = 0;
     virtual void    actionClient(ClientSocket *client, std::string data) = 0;
     virtual ClientSocket *createClient(SOCKET newSocket, std::string const & name);
+    virtual void    onClientConnect(ClientSocket *client);
 };
 
 
