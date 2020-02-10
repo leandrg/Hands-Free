@@ -10,5 +10,6 @@
 #define             HFP_COMMAND_SUCCESS                 "OK"
 #define             HFP_COMMAND_ERROR                   "ERROR"
 #define             HFP_COMMAND_SUPPORTED_FEATURES      "+BRSF"
+#define             HFP_COMMAND_INDICATORS              "+CIND"
 
 #endif              //HANDS_FREE_HFPDEFINE_HPP

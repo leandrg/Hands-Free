@@ -29,9 +29,10 @@ void                    ServerHFP::onClientConnect(ClientSocket *client) {
     this->sendSupportedFeatures(client);
 }
 
-void                    ServerHFP::sendSupportedFeatures(ClientSocket *client) {
-    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=0" << "\n";
-    //TODO Add back
+void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &features = "0") {
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=" << features << "\n";
+    client->onSuccess(this, &ServerHFP::sendSupportedFeatures);
+    //TODO Add real function
 }
 
 
