@@ -17,7 +17,7 @@ public:
     void                    onSuccess(ClientSocket *client, std::string const &str);
     void                    onError(ClientSocket *client, std::string const &str);
 
-    void                    sendSupportedFeatures(ClientSocket *client);
+    void                    sendSupportedFeatures(ClientSocket *client, std::string const &features = "0");
 
     void                    receiveSupportedFeatures(ClientSocket *client, std::string const &str);
 
