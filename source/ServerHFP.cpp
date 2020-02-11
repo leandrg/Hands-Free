@@ -26,6 +26,7 @@ ClientSocket            *ServerHFP::createClient(SOCKET newSocket, std::string c
 }
 
 void                    ServerHFP::onClientConnect(ClientSocket *client) {
+    std::cout << "Connect" << std::endl;
     this->sendSupportedFeatures(client);
 }
 
