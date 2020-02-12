@@ -30,7 +30,7 @@ void                    ServerHFP::onClientConnect(ClientSocket *client) {
 }
 
 void                    ServerHFP::actionClient(ClientSocket *client, std::string data) {
-    std::cout << "New message from " << client->getStringId() << " : -" << << data << "-" << std::endl;
+    std::cout << "New message from " << client->getStringId() << " : -" << data << "-" << std::endl;
     this->parseCommand(client, data);
 }
 
