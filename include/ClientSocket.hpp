@@ -8,6 +8,8 @@
 #include                "Socket.hpp"
 #include                "ActionClientFunction.hpp"
 #include                "Command.hpp"
+#include <iostream>
+
 
 class                   ClientSocket: public Socket {
     std::string          _stringId;
@@ -22,7 +24,8 @@ public:
     void deleteSuccess();
     template <class T>
         void onSuccess(T &context, ActionClientFunction<T> f) {
-            this->deleteSuccess();
+        std::cout << "called1" << std::endl;
+        this->deleteSuccess();
             this->success = new Command<T>(context, f);
         };
     void onSuccess(ClientSocket *clientSocket, std::string const &str);

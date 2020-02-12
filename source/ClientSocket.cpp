@@ -2,8 +2,7 @@
 // Created by Gaëtan Léandre on 15/10/2019.
 //
 
-#include <iostream>
-#include "ClientSocket.hpp"
+#include                "ClientSocket.hpp"
 
 ClientSocket::ClientSocket(SOCKET socket, std::string stringId) : Socket(socket) {
     this->_stringId = stringId;
