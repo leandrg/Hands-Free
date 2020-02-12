@@ -32,7 +32,9 @@ void                    ServerHFP::onClientConnect(ClientSocket *client) {
 }
 
 void                    ServerHFP::actionClient(ClientSocket *client, std::string data) {
+    std::cout << ">callParse" << std::endl;
     this->parseCommand(client, data);
+    std::cout << "<callParse" << std::endl;
 }
 
 void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
