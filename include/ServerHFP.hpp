@@ -20,8 +20,10 @@ public:
     void                    onError(ClientSocket *client, std::string const &str);
 
     void                    sendSupportedFeatures(ClientSocket *client, std::string const &features = "0");
+    void                    sendIndicatorsListQuestion(ClientSocket *client, std::string const &question = "?");
 
     void                    receiveSupportedFeatures(ClientSocket *client, std::string const &str);
+    void                    receiveIndicatorsList(ClientSocket *client, std::string const &str);
 
 protected:
     virtual ClientSocket    *createClient(SOCKET newSocket, std::string const &name);
