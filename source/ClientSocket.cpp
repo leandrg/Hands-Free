@@ -2,6 +2,7 @@
 // Created by Gaëtan Léandre on 15/10/2019.
 //
 
+#include <iostream>
 #include "ClientSocket.hpp"
 
 ClientSocket::ClientSocket(SOCKET socket, std::string stringId) : Socket(socket) {
@@ -30,8 +31,10 @@ void                    ClientSocket::deleteSuccess() {
 }
 
 void                    ClientSocket::onSuccess(ClientSocket *clientSocket, std::string const &str) {
+    std::cout << "called2" << std::endl;
     if (this->success == NULL)
         return;
+    std::cout << "called3" << std::endl;
     this->success->launch(clientSocket, str);
     this->deleteSuccess();
 }
