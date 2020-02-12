@@ -8,6 +8,7 @@
 #include                    "ServerBluetooth.hpp"
 #include                    "SdpHFP.hpp"
 #include                    "ClientHFP.hpp"
+#include                    "IndicatorHFP.hpp"
 #include                    "HFPDefine.hpp"
 
 class ServerHFP : public ServerBluetooth, protected SdpHFP {

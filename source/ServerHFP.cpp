@@ -53,6 +53,27 @@ void                    ServerHFP::receiveSupportedFeatures(ClientSocket *client
 }
 
 void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, std::string const &str) {
-    (void)client;
-    std::cout << "||" << str << "||" << std::endl;
+    std::string::size_type  pos = 0;
+    std::string::size_type  prev = 0;
+    int                     parent = 0;
+
+    ((ClientHFP *)client)->deleteIndicators();
+    while (!str.empty() && pos < str.length()) {
+        if (parent == 0 && str[pos] == ',') {
+            std::string tmp = str.substr(prev, pos - prev);
+            this->clean(tmp);
+            if (!tmp.empty() && tmp[0] == '(' && tmp[tmp.length() - 1] == ')') {
+                tmp = tmp.substr(1, tmp.length() - 2);
+                this->clean(tmp);
+            }
+            ((ClientHFP *)client)->pushIndicator(IndicatorHFP(tmp));
+            prev = pos + 1;
+        }
+        else if (str[pos] == '(')
+            parent++;
+        else if (str[pos] == ')')
+            parent--;
+        pos++;
+    }
+    ((ClientHFP *)client)->printIndicators();
 }

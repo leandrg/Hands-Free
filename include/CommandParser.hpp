@@ -14,9 +14,9 @@
 class                           CommandParser {
     std::unordered_map<std::string, CommandParent*> _mapCommands = {};
 
+protected:
     void                        clean(std::string &str) const;
     std::vector<std::string>    split(std::string const &str, std::string const & delimiter, int maxSize = 0) const;
-
 
 public:
     CommandParser();
