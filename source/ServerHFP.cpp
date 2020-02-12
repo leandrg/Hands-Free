@@ -40,7 +40,7 @@ void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, s
     client->onSuccess(*this, &ServerHFP::sendIndicatorsListQuestion); //TODO ADD CODECS?
 }
 
-void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question = "?") {
+void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question) {
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "=" << question << "\n";
     client->onSuccess(*this, &ServerHFP::sendIndicatorsListQuestion);
 }
