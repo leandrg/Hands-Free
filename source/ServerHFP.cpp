@@ -19,6 +19,7 @@ void                    ServerHFP::onSuccess(ClientSocket *client, std::string c
 }
 
 void                    ServerHFP::onError(ClientSocket *client, std::string const &str) {
+    std::cerr << "Error : " << str << std::endl;
     client->onError(client, str);
 }
 
