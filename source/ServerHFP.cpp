@@ -15,6 +15,7 @@ ServerHFP::ServerHFP(uint8_t channel) : ServerBluetooth(channel), SdpHFP() {
 ServerHFP::~ServerHFP(){}
 
 void                    ServerHFP::onSuccess(ClientSocket *client, std::string const &str) {
+    std::cout << "called" << std::endl;
     client->onSuccess(client, str);
 }
 
