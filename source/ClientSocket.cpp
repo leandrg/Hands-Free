@@ -24,7 +24,6 @@ void                    ClientSocket::setStringId(const std::string stringId) {
 }
 
 void                    ClientSocket::deleteSuccess() {
-    std::cout << "dell" << std::endl;
     if (this->success == NULL)
         return;
     delete this->success;
@@ -32,12 +31,14 @@ void                    ClientSocket::deleteSuccess() {
 }
 
 void                    ClientSocket::onSuccess(ClientSocket *clientSocket, std::string const &str) {
-    std::cout << "called2" << std::endl;
+    CommandParent       *tmp = NULL;
+
     if (this->success == NULL)
         return;
-    std::cout << "called3" << std::endl;
-    this->success->launch(clientSocket, str);
-    this->deleteSuccess();
+    tmp = this->success;
+    this->success = NULL;
+    tmp->launch(clientSocket, str);
+    delete tmp;
 }
 
 void                    ClientSocket::deleteError() {
@@ -48,8 +49,12 @@ void                    ClientSocket::deleteError() {
 }
 
 void                    ClientSocket::onError(ClientSocket *clientSocket, std::string const &str) {
+    CommandParent       *tmp = NULL;
+
     if (this->error == NULL)
         return;
-    this->error->launch(clientSocket, str);
-    this->deleteError();
+    tmp = this->error;
+    this->error = NULL;
+    tmp->launch(clientSocket, str);
+    delete tmp;
 }

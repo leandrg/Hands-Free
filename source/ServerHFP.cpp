@@ -32,9 +32,7 @@ void                    ServerHFP::onClientConnect(ClientSocket *client) {
 }
 
 void                    ServerHFP::actionClient(ClientSocket *client, std::string data) {
-    std::cout << ">callParse" << std::endl;
     this->parseCommand(client, data);
-    std::cout << "<callParse" << std::endl;
 }
 
 void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
@@ -45,9 +43,7 @@ void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, s
 
 void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question) {
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "=" << (question.empty() ? "?" : question) << "\n";
-    std::cout << ">IMPORTANT" << std::endl;
     client->onSuccess(*this, &ServerHFP::sendIndicatorsValueQuestion);
-    std::cout << "<IMPORTANT" << std::endl;
 }
 
 void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
