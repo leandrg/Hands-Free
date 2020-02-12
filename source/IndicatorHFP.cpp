@@ -9,7 +9,6 @@ IndicatorHFP::IndicatorHFP(std::string const &str) {
     std::pair<int, int> pair = parseRange(str);
     this->_downRange = pair.first;
     this->_upRange = pair.second;
-    std::cout << this->_name << "->" << this->_downRange << " " << this->_upRange << std::endl;
 }
 
 IndicatorHFP::~IndicatorHFP() {

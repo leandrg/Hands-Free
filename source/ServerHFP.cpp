@@ -42,9 +42,14 @@ void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, s
 }
 
 void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question) {
-    std::cout << "--" << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "=" << (question.empty() ? "?" : question) << std::endl;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "=" << (question.empty() ? "?" : question) << "\n";
-    client->onSuccess(*this, &ServerHFP::sendIndicatorsListQuestion);
+    client->onSuccess(*this, &ServerHFP::sendIndicatorsValueQuestion);
+}
+
+void                    sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
+    (void)_;
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "?" << "\n";
+//    client->onSuccess(*this, &ServerHFP::sendIndicatorsValueQuestion);
 }
 
 
@@ -57,6 +62,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
     std::string::size_type  prev = 0;
     int                     parent = 0;
 
+    std::cout << str << std::endl;
     ((ClientHFP *)client)->deleteIndicators();
     while (!str.empty() && pos < str.length()) {
         if (parent == 0 && str[pos] == ',') {
@@ -75,5 +81,4 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
             parent--;
         pos++;
     }
-    ((ClientHFP *)client)->printIndicators();
 }

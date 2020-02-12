@@ -22,6 +22,7 @@ public:
 
     void                    sendSupportedFeatures(ClientSocket *client, std::string const &features = "0");
     void                    sendIndicatorsListQuestion(ClientSocket *client, std::string const &question = "?");
+    void                    sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_ = "");
 
     void                    receiveSupportedFeatures(ClientSocket *client, std::string const &str);
     void                    receiveIndicatorsList(ClientSocket *client, std::string const &str);

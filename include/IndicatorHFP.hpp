@@ -6,7 +6,6 @@
 #define                     HANDS_FREE_INDICATORHFP_HPP
 
 #include                    <string>
-#include                    <iostream>
 
 class                       IndicatorHFP {
     std::string             _name;

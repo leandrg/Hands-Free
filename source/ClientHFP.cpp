@@ -28,5 +28,5 @@ void                    ClientHFP::pushIndicator(IndicatorHFP const &indicator) 
 
 void                    ClientHFP::printIndicators() const {
     for (auto it = this->_indicators.begin(); it != this->_indicators.end(); ++it)
-        std::cout << ' ' << it->getName() << std::endl;
+        std::cout << it->getName() << std::endl;
 }
