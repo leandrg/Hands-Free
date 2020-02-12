@@ -29,6 +29,11 @@ void                    ServerHFP::onClientConnect(ClientSocket *client) {
     this->sendSupportedFeatures(client);
 }
 
+void                    ServerHFP::actionClient(ClientSocket *client, std::string data) {
+    std::cout << "New message from " << client->getStringId() << " : -" << << data << "-" << std::endl;
+    this->parseCommand(client, data);
+}
+
 void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=" << std::to_string(this->_features) << "\n";

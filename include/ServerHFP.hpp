@@ -26,6 +26,7 @@ public:
 protected:
     virtual ClientSocket    *createClient(SOCKET newSocket, std::string const &name);
     virtual void            onClientConnect(ClientSocket *client);
+    virtual void            actionClient(ClientSocket *client, std::string data);
 
 };
 
