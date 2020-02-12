@@ -13,3 +13,7 @@ ClientHFP::~ClientHFP() {
 void                    ClientHFP::setFeatures(int features) {
     this->_features = features;
 }
+
+bool                    ClientHFP::supportFeature(int feature) {
+    return ((this->_features & feature) > 0);
+}

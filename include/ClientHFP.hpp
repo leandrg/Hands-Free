@@ -14,6 +14,7 @@ public:
     ClientHFP(SOCKET socket, std::string stringId);
     ~ClientHFP();
     void                setFeatures(int features);
+    bool                supportFeature(int feature);
 };
 
 #endif                  //HANDS_FREE_CLIENTHFP_HPP

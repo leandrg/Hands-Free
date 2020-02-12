@@ -37,5 +37,8 @@ void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, s
 
 
 void                    ServerHFP::receiveSupportedFeatures(ClientSocket *client, std::string const &str) {
+    std::cout << "features " << str << std::endl;
     ((ClientHFP *)client)->setFeatures(std::stoi(str));
+    std::cout << ((ClientHFP *)client)->supportFeature(HFP_BRSF_FEATURE_THREE_WAY_CALL) << std::endl;
+    std::cout << ((ClientHFP *)client)->supportFeature(HFP_BRSF_FEATURE_HF_IND) << std::endl;
 }
