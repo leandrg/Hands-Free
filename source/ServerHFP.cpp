@@ -26,18 +26,16 @@ ClientSocket            *ServerHFP::createClient(SOCKET newSocket, std::string c
 }
 
 void                    ServerHFP::onClientConnect(ClientSocket *client) {
-    std::cout << "Connect" << std::endl;
     this->sendSupportedFeatures(client);
 }
 
-void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &features) {
-    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=" << features << "\n";
+void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
+    (void)_;
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=" << std::to_string(this->_features) << "\n";
     client->onSuccess(*this, &ServerHFP::sendSupportedFeatures);
-    //TODO Add real function
 }
 
 
 void                    ServerHFP::receiveSupportedFeatures(ClientSocket *client, std::string const &str) {
-    (void)client;
-    (void)str;
+    ((ClientHFP *)client)->setFeatures(std::stoi(str));
 }

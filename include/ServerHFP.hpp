@@ -11,6 +11,8 @@
 #include                    "HFPDefine.hpp"
 
 class ServerHFP : public ServerBluetooth, protected SdpHFP {
+    int                     _features = 0;
+
 public:
     ServerHFP(uint8_t channel = 1);
     ~ServerHFP();

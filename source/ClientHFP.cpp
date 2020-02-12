@@ -9,3 +9,7 @@ ClientHFP::ClientHFP(SOCKET socket, std::string stringId) : ClientSocket(socket,
 
 ClientHFP::~ClientHFP() {
 }
+
+void                    ClientHFP::setFeatures(int features) {
+    this->_features = features;
+}

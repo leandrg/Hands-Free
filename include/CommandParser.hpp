@@ -8,10 +8,15 @@
 #include                        <string>
 #include                        <iostream>
 #include                        <unordered_map>
+#include                        <vector>
 #include                        "Command.hpp"
 
 class                           CommandParser {
     std::unordered_map<std::string, CommandParent*> _mapCommands = {};
+
+    void                        clean(std::string &str) const;
+    std::vector<std::string>    split(std::string const &str, std::string const & delimiter, int maxSize = 0) const;
+
 
 public:
     CommandParser();
