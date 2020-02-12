@@ -6,6 +6,7 @@
 #define                         HANDS_FREE_CLIENTHFP_HPP
 
 #include                        <vector>
+#include                        <iostream>
 #include                        "ClientSocket.hpp"
 #include                        "IndicatorHFP.hpp"
 
