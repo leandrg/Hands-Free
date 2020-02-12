@@ -22,7 +22,9 @@ std::vector<std::string>    CommandParser::split(std::string const &str, std::st
         prev = pos + 1;
         i++;
     }
-    strings.push_back(str.substr(prev));
+    std::string tmp = str.substr(prev);
+    if (!tmp.empty())
+        strings.push_back(tmp);
     return strings;
 }
 
@@ -70,12 +72,16 @@ bool                    CommandParser::parseCommand(ClientSocket *client, std::s
 
     for (std::vector<std::string>::iterator it = strings.begin() ; it != strings.end(); ++it) {
         std::vector<std::string> command = this->split(*it, ":", 2);
-        this->clean(command[0]);
-        this->clean(command[1]);
+        if (command.size() > 0)
+            this->clean(command[0]);
+        else
+            continue;
+        if (command.size() > 1)
+            this->clean(command[1]);
         std::unordered_map<std::string, CommandParent*>::iterator mapIt = this->_mapCommands.find(command[0]);
 
         if (mapIt != this->_mapCommands.end()) {
-            mapIt->second->launch(client, command[1]);
+            mapIt->second->launch(client, command.size() > 1 ? command[1] : "");
         }
     }
     return true;
