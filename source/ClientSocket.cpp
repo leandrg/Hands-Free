@@ -23,6 +23,7 @@ void                    ClientSocket::setStringId(const std::string stringId) {
 }
 
 void                    ClientSocket::deleteSuccess() {
+    std::cout << "dell" << std::endl;
     if (this->success == NULL)
         return;
     delete this->success;

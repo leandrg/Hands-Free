@@ -24,12 +24,9 @@ public:
     void deleteSuccess();
     template <class T>
         void onSuccess(T &context, ActionClientFunction<T> f) {
-        std::cout << "called1" << std::endl;
-        this->deleteSuccess();
+            this->deleteSuccess();
             this->success = new Command<T>(context, f);
-        std::cout << (this->success == NULL) << std::endl;
-
-    };
+        };
     void onSuccess(ClientSocket *clientSocket, std::string const &str);
     void deleteError();
     template <class T>
