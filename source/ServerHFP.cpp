@@ -101,6 +101,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
     else {
         std::cout << "||" << str << std::endl;
         std::vector<std::string> vectorStr = this->split(str, ",");
+        std::cout << vectorStr.size() << std::endl;
         std::vector<int> vectorInt;
         for (auto it = vectorStr.begin(); it != vectorStr.end(); it++) {
             try {vectorInt.push_back(std::stoi(*it));} catch (...) {vectorInt.push_back(0);}
