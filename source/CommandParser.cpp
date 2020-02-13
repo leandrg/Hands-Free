@@ -81,7 +81,7 @@ bool                    CommandParser::parseCommand(ClientSocket *client, std::s
         std::unordered_map<std::string, CommandParent*>::iterator mapIt = this->_mapCommands.find(command[0]);
 
         if (mapIt != this->_mapCommands.end()) {
-            std::cout << "Command " << command[0] << " from " << client->getStringId() << " " << (command.size() > 1 ? command[1] : "") << std::endl;
+            std::cout << "Command " << command[0] << " from " << client->getStringId() << std::endl;
             mapIt->second->launch(client, command.size() > 1 ? command[1] : "");
         }
     }
