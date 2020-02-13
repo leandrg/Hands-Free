@@ -49,12 +49,19 @@ void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *clie
 void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "?" << "\n";
+    client->onSuccess(*this, &ServerHFP::sendEnableErrorMessage);
+}
+
+void                    ServerHFP::sendEnableErrorMessage(ClientSocket *client, std::string const &_ = "") {
+    (void)_;
+    *client << HFP_COMMAND_SEND_BY_HF << HPP_COMMAND_ERROR_CODE << "=2" << "\n";
     client->onSuccess(*this, &ServerHFP::sendStartListenIndicators);
+
 }
 
 void                    ServerHFP::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
     (void)_;
-    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\r\n";
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
     std::cout << "sended : " << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
 }
 
@@ -101,7 +108,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
         std::vector<std::string> vectorStr = this->split(str, ",");
         std::vector<int> vectorInt;
         for (auto it = vectorStr.begin(); it != vectorStr.end(); it++) {
-            try {vectorInt.push_back(std::stoi(*it));} catch (...) {vectorInt.push_back(0);}
+            try {vectorInt.push_back(std::stoi(*it))} catch (...) {vectorInt.push_back(0)}
         }
         ((ClientHFP *)client)->setIndicatorsValue(vectorInt);
     }
