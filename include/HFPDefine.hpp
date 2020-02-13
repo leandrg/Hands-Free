@@ -14,7 +14,7 @@
 #define             HFP_COMMAND_SUPPORTED_FEATURES      "+BRSF"
 #define             HFP_COMMAND_INDICATORS              "+CIND"
 #define             HFP_COMMAND_LISTEN_INDICATORS       "+CMER"
-#define             HPP_COMMAND_ERROR_CODE              "+Cmee"
+#define             HPP_COMMAND_ERROR_CODE              "+CMEE"
 
 //AT+BRSF FEATURES
 #define             HFP_AT_BRSF_FEATURE_RNEC            (1 << 0)

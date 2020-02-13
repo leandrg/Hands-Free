@@ -62,7 +62,7 @@ void                    ServerHFP::sendEnableErrorMessage(ClientSocket *client, 
 
 void                    ServerHFP::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
     (void)_;
-    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "=" << "3,0,0,1" "\n";
     std::cout << "sended : " << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
 }
 
