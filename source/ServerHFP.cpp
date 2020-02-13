@@ -79,6 +79,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
     int                     parent = 0;
 
     if (this->containAlpha(str)) {
+        std::cout << str << std::endl;
         ((ClientHFP *)client)->deleteIndicators();
         while (!str.empty() && pos < str.length()) {
             if (parent == 0 && str[pos] == ',') {
