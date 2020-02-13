@@ -54,9 +54,8 @@ void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *cli
 
 void                    ServerHFP::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
     (void)_;
-    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\r\n";
     std::cout << "sended : " << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
-    ((ClientHFP *)client)->printIndicators();
 }
 
 
@@ -79,7 +78,6 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
     int                     parent = 0;
 
     if (this->containAlpha(str)) {
-        std::cout << str << std::endl;
         ((ClientHFP *)client)->deleteIndicators();
         while (!str.empty() && pos <= str.length()) {
             if (parent == 0 && (pos == str.length() || str[pos] == ',')) {
