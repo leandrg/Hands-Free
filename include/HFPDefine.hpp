@@ -13,6 +13,7 @@
 #define             HFP_COMMAND_ERROR                   "ERROR"
 #define             HFP_COMMAND_SUPPORTED_FEATURES      "+BRSF"
 #define             HFP_COMMAND_INDICATORS              "+CIND"
+#define             HFP_COMMAND_LISTEN_INDICATORS       "+CMER"
 
 //AT+BRSF FEATURES
 #define             HFP_AT_BRSF_FEATURE_RNEC            (1 << 0)
