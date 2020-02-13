@@ -52,7 +52,7 @@ void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *cli
     client->onSuccess(*this, &ServerHFP::sendEnableErrorMessage);
 }
 
-void                    ServerHFP::sendEnableErrorMessage(ClientSocket *client, std::string const &_ = "") {
+void                    ServerHFP::sendEnableErrorMessage(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HPP_COMMAND_ERROR_CODE << "=2" << "\n";
     client->onSuccess(*this, &ServerHFP::sendStartListenIndicators);
