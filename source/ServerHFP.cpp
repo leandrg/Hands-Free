@@ -55,6 +55,7 @@ void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *cli
 void                    ServerHFP::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
+    std::cout << "sended : " << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "\n";
     ((ClientHFP *)client)->printIndicators();
 }
 
@@ -98,6 +99,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
         }
     }
     else {
+        std::cout << "||" << str << std::endl;
         std::vector<std::string> vectorStr = this->split(str, ",");
         std::vector<int> vectorInt;
         for (auto it = vectorStr.begin(); it != vectorStr.end(); it++) {
