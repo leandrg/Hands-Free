@@ -26,7 +26,18 @@ void                    ClientHFP::pushIndicator(IndicatorHFP const &indicator) 
     this->_indicators.push_back(indicator);
 }
 
+void                    ClientHFP::setIndicatorsValue(std::vector<int> const &vector) {
+    auto                itVec = vector.begin();
+    auto                itInd = this->_indicators.begin();
+
+    while (itVec != vector.end() && itInd != this->_indicators.end()) {
+        itInd->setValue(*itVec);
+        itVec++;
+        itInd++;
+    }
+}
+
 void                    ClientHFP::printIndicators() const {
     for (auto it = this->_indicators.begin(); it != this->_indicators.end(); ++it)
-        std::cout << it->getName() << std::endl;
+        std::cout << it->getName() << " " << it->getValue() << std::endl;
 }

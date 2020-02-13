@@ -21,8 +21,8 @@ public:
     bool                        supportFeature(int feature);
     void                        deleteIndicators();
     void                        pushIndicator(IndicatorHFP const &indicator);
+    void                        setIndicatorsValue(std::vector<int> const &vector);
     void                        printIndicators() const;
-
-    };
+};
 
 #endif                  //HANDS_FREE_CLIENTHFP_HPP

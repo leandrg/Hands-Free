@@ -46,3 +46,13 @@ std::pair<int, int>     IndicatorHFP::parseRange(std::string const &str) const {
 std::string             IndicatorHFP::getName() const {
     return this->_name;
 }
+
+int                     IndicatorHFP::getValue() const {
+    return this->_value;
+}
+
+
+void                    IndicatorHFP::setValue(int value) {
+    if (this->_value >= this->_downRange && this->_value <= this->_upRange)
+        this->_value = value;
+}

@@ -9,7 +9,6 @@ ClientSocket::ClientSocket(SOCKET socket, std::string stringId) : Socket(socket)
 }
 
 ClientSocket::~ClientSocket() {
-    std::cout << "destruct" << std::endl;
     this->deleteSuccess();
     this->deleteError();
     close(this->_socket);

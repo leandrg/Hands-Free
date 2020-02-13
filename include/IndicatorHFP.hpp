@@ -21,6 +21,8 @@ public:
     IndicatorHFP(std::string const &str);
     ~IndicatorHFP();
     std::string             getName() const;
+    int                     getValue() const;
+    void                    setValue(int value);
 };
 
 
