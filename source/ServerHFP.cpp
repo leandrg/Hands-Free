@@ -48,9 +48,7 @@ void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *clie
 
 void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
     (void)_;
-    *client << HFP_COMMAND_SEND_BY_HF << HPP_COMMAND_ERROR_CODE << "?" << "\n";
-
-//    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "?" << "\n";
+    *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "?" << "\n";
     client->onSuccess(*this, &ServerHFP::sendEnableErrorMessage);
 }
 
