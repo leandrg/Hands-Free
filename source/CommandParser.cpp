@@ -85,6 +85,7 @@ bool                    CommandParser::parseCommand(ClientSocket *client, std::s
             mapIt->second->launch(client, command.size() > 1 ? command[1] : "");
         }
         else {
+            this->clean(*it);
             std::cout << "Unknown " << *it << " from " << client->getStringId() << std::endl;
         }
     }
