@@ -111,7 +111,7 @@ void                    ServerHFP::receiveIndicatorValue(ClientSocket *client, s
     std::vector<std::string> vectorStr = this->split(str, ",");
     std::vector<int> vectorInt;
 
-    if (vectorStr.size() > 2) {
+    if (vectorStr.size() >= 2) {
         int feature = 0;
         int value = 0;
         try {feature = std::stoi(vectorStr[0]);} catch (...) {};
