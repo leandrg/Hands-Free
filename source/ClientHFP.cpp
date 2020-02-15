@@ -37,6 +37,12 @@ void                    ClientHFP::setIndicatorsValue(std::vector<int> const &ve
     }
 }
 
+void                    ClientHFP::setIndicatorValue(int feature, int value) {
+    if (feature  > 0 && (unsigned)feature <= this->_indicators.size()) {
+        this->_indicators[feature - 1].setValue(value);
+    }
+}
+
 void                    ClientHFP::printIndicators() const {
     for (auto it = this->_indicators.begin(); it != this->_indicators.end(); ++it)
         std::cout << it->getName() << " " << it->getValue() << std::endl;

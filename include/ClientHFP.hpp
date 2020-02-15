@@ -22,6 +22,7 @@ public:
     void                        deleteIndicators();
     void                        pushIndicator(IndicatorHFP const &indicator);
     void                        setIndicatorsValue(std::vector<int> const &vector);
+    void                        setIndicatorValue(int feature, int value);
     void                        printIndicators() const;
 };
 

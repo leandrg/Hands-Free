@@ -86,7 +86,8 @@ bool                    CommandParser::parseCommand(ClientSocket *client, std::s
         }
         else {
             this->clean(*it);
-            std::cout << "Unknown " << *it << " from " << client->getStringId() << std::endl;
+            if (!(*it).empty())
+                std::cout << "Unknown " << *it << " from " << client->getStringId() << std::endl;
         }
     }
     return true;

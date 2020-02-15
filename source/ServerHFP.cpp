@@ -10,6 +10,7 @@ ServerHFP::ServerHFP(uint8_t channel) : ServerBluetooth(channel), SdpHFP() {
     this->addCommand(*this, HFP_COMMAND_ERROR, &ServerHFP::onError);
     this->addCommand(*this, HFP_COMMAND_SUPPORTED_FEATURES, &ServerHFP::receiveSupportedFeatures);
     this->addCommand(*this, HFP_COMMAND_INDICATORS, &ServerHFP::receiveIndicatorsList);
+    this->addCommand(*this, HFP_COMMAND_INDICATOR_VALUE, &ServerHFP::receiveIndicatorValue);
 };
 
 ServerHFP::~ServerHFP(){}
@@ -104,4 +105,20 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
         }
         ((ClientHFP *)client)->setIndicatorsValue(vectorInt);
     }
+}
+
+void                    ServerHFP::receiveIndicatorValue(ClientSocket *client, std::string const &str) {
+    std::vector<std::string> vectorStr = this->split(str, ",");
+    std::vector<int> vectorInt;
+
+    if (vectorStr.size() > 2) {
+        int feature = 0;
+        int value = 0;
+        try {feature = std::stoi(vectorStr[0]);} catch (...) {};
+        try {value = std::stoi(vectorStr[1]);} catch (...) {};
+        ((ClientHFP *)client)->setIndicatorValue(feature, value);
+        ((ClientHFP *)client)->printIndicators();
+
+    }
+
 }

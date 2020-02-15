@@ -29,6 +29,7 @@ public:
 
     void                    receiveSupportedFeatures(ClientSocket *client, std::string const &str);
     void                    receiveIndicatorsList(ClientSocket *client, std::string const &str);
+    void                    receiveIndicatorValue(ClientSocket *client, std::string const &str);
 
 protected:
     virtual ClientSocket    *createClient(SOCKET newSocket, std::string const &name);
