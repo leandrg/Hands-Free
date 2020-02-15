@@ -84,6 +84,9 @@ bool                    CommandParser::parseCommand(ClientSocket *client, std::s
             std::cout << "Command " << command[0] << " from " << client->getStringId() << std::endl;
             mapIt->second->launch(client, command.size() > 1 ? command[1] : "");
         }
+        else {
+            std::cout << "Unknown " << str << " from " << client->getStringId() << std::endl;
+        }
     }
     return true;
 }
