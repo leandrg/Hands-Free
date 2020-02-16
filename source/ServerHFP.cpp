@@ -117,8 +117,6 @@ void                    ServerHFP::receiveIndicatorValue(ClientSocket *client, s
         try {feature = std::stoi(vectorStr[0]);} catch (...) {};
         try {value = std::stoi(vectorStr[1]);} catch (...) {};
         ((ClientHFP *)client)->setIndicatorValue(feature, value);
-        ((ClientHFP *)client)->printIndicators();
-
     }
 
 }
