@@ -82,7 +82,7 @@ void                    ServerHFPService::receiveIndicatorsList(ClientSocket *cl
         ((ClientHFP *)client)->deleteIndicators();
         while (!str.empty() && pos <= str.length()) {
             if (parent == 0 && (pos == str.length() || str[pos] == ',')) {
-                std::string tmp = str.substr(prev, pos - prev);
+                std::string tmp = str.substr(prev, (pos == str.length() ? pos - 1 : pos) - prev);
                 this->clean(tmp);
                 if (!tmp.empty() && tmp[0] == '(' && tmp[tmp.length() - 1] == ')') {
                     tmp = tmp.substr(1, tmp.length() - 2);
