@@ -2,13 +2,15 @@
 // Created by Gaëtan Léandre on 30/01/2020.
 //
 
-#include       "ServerHFPService.hpp"
+#include       "ServerHFP.hpp"
+#include <iostream>
 
 int main() {
-    ServerHFPService hfp = ServerHFPService();
+    ServerHFP hfp = ServerHFP();
+
     hfp.start();
-    std::cout << hfp.getServerName() << std::endl;
     hfp.listen();
+    getchar();
     hfp.stop();
     return 0;
 }

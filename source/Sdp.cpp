@@ -11,7 +11,6 @@ Sdp::~Sdp() {
 }
 
 void                    Sdp::unregisterRecord() {
-    std::cout << "here" << std::endl;
     if (this->_session != NULL) {
         std::cout << "Close session" << std::endl;
         sdp_close(this->_session);

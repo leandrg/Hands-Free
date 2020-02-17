@@ -1,7 +1,7 @@
 NAME	=	testBluetooth
 
 FLAG	=	-Wall -Wextra -Werror \
-			-I./include -g -g3 -std=c++11 -lbluetooth
+			-I./include -g -g3 -std=c++11 -lbluetooth -pthread
 
 SRC		=	source/*.cpp main.cpp
 

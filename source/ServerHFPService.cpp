@@ -4,7 +4,7 @@
 
 #include                "ServerHFPService.hpp"
 
-ServerHFPService::ServerHFPService(uint8_t channel) : ServerRFCOMM(channel), SdpHFP() {
+ServerHFPService::ServerHFPService(uint8_t channel, int maxClients) : ServerRFCOMM(channel, maxClients), SdpHFP() {
     this->registerRecord(channel);
     this->addCommand(*this, HFP_COMMAND_SUCCESS, &ServerHFPService::onSuccess);
     this->addCommand(*this, HFP_COMMAND_ERROR, &ServerHFPService::onError);
@@ -13,7 +13,8 @@ ServerHFPService::ServerHFPService(uint8_t channel) : ServerRFCOMM(channel), Sdp
     this->addCommand(*this, HFP_COMMAND_INDICATOR_VALUE, &ServerHFPService::receiveIndicatorValue);
 };
 
-ServerHFPService::~ServerHFPService(){}
+ServerHFPService::~ServerHFPService(){
+}
 
 void                    ServerHFPService::onSuccess(ClientSocket *client, std::string const &str) {
     client->onSuccess(client, str);

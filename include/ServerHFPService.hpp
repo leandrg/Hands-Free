@@ -17,7 +17,7 @@ class ServerHFPService : public ServerRFCOMM, protected SdpHFP {
     bool                    containAlpha(std::string const &str) const;
 
 public:
-    ServerHFPService(uint8_t channel = 1);
+    ServerHFPService(uint8_t channel = 1, int maxClients = 1);
     ~ServerHFPService();
     void                    onSuccess(ClientSocket *client, std::string const &str);
     void                    onError(ClientSocket *client, std::string const &str);

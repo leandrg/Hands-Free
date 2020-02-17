@@ -26,4 +26,4 @@ public:
     void                        printIndicators() const;
 };
 
-#endif                  //HANDS_FREE_CLIENTHFP_HPP
+#endif                          //HANDS_FREE_CLIENTHFP_HPP
