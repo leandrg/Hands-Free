@@ -73,6 +73,7 @@ t_package       &operator<<(t_package &data, const Socket &a) {
     t_package   package = a.read();
 
     data.size = package.size;
-    ::strncpy(data.buffer, package.buffer, package.size);
+    if (package.size > 0)
+        ::strncpy(data.buffer, package.buffer, package.size);
     return data;
 }
