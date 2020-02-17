@@ -40,6 +40,6 @@ ClientSocket            *ServerRFCOMM::accept() {
     return this->createClient(newSocket, tmpName);
 }
 
-void                    ServerRFCOMM::actionClient(ClientSocket *client, std::string data) {
-    std::cout << "New message from " << client->getStringId() << " : " << data << std::endl;
+void                    ServerRFCOMM::actionClient(ClientSocket *client, t_package &data) {
+    std::cout << "New message from " << client->getStringId() << " : " << data.buffer << std::endl;
 }

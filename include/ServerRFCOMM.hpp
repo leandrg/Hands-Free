@@ -22,7 +22,7 @@ protected:
     virtual void            socket();
     virtual int             bind() const;
     virtual ClientSocket    *accept();
-    virtual void            actionClient(ClientSocket *client, std::string data);
+    virtual void            actionClient(ClientSocket *client, t_package &data);
 };
 
 

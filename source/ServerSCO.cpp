@@ -35,6 +35,6 @@ ClientSocket            *ServerSCO::accept() {
     return this->createClient(newSocket, tmpName);
 }
 
-void                    ServerSCO::actionClient(ClientSocket *client, std::string data) {
-    std::cout << "Received data from " << client->getStringId() << " : [" << data << "]" << std::endl;
+void                    ServerSCO::actionClient(ClientSocket *client, t_package &data) {
+    std::cout << "Received data from " << client->getStringId() << " : [" << data.buffer << "] (" << std::to_string(data.size) << ")" << std::endl;
 }

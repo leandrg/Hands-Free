@@ -36,6 +36,6 @@ ClientSocket            *ServerTCP::accept() {
     return this->createClient(newSocket, inet_ntoa(sockaddrIn.sin_addr));
 }
 
-void                    ServerTCP::actionClient(ClientSocket *client, std::string data) {
-    std::cout << "New message from " << client->getStringId() << " : " << data << std::endl;
+void                    ServerTCP::actionClient(ClientSocket *client, t_package &data) {
+    std::cout << "New message from " << client->getStringId() << " : " << data.buffer << std::endl;
 }

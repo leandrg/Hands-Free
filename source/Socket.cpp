@@ -3,7 +3,6 @@
 //
 
 #include        "Socket.hpp"
-#include <iostream>
 
 Socket::Socket() {}
 
@@ -28,19 +27,15 @@ bool            Socket::fdIsSet(const fd_set *value) const {
     return (FD_ISSET(this->_socket, value));
 }
 
-std::string     Socket::read() const {
-    std::string stringBuffer = "";
-    char buffer[MAX_BUFF_SIZE + 1] = {0};
-    int size;
+t_package       Socket::read() const {
+    t_package   package;
 
-    size = ::read(this->_socket, buffer, MAX_BUFF_SIZE);
-    std::cout << "read " << size << "[" << buffer << "]" << std::endl;
-    (void)size;
-    return (std::string(buffer));
+    package.size = ::read(this->_socket, package.buffer, MAX_BUFF_SIZE);
+    return (package);
 }
 
-void            Socket::write(const std::string data) {
-    ::write(this->_socket, data.c_str(), data.length());
+void            Socket::write(t_package const &package) {
+    ::write(this->_socket, package.buffer, package.size);
 }
 
 bool            operator<(const Socket &a, const Socket &b) {
@@ -60,11 +55,24 @@ bool            operator==(const Socket &a, fd_set *value) {
 }
 
 Socket          &operator<<(Socket &a, const std::string data) {
-    a.write(data);
+    t_package   package;
+
+    package.size = data.length();
+    ::strncpy(package.buffer, data.c_str(), package.size);
+    a.write(package);
     return a;
 }
 
 std::string     &operator<<(std::string &data, const Socket &a) {
-    data = a.read();
+    t_package   package = a.read();
+    data = std::string(package.buffer);
+    return data;
+}
+
+t_package       &operator<<(t_package &data, const Socket &a) {
+    t_package   package = a.read();
+
+    data.size = package.size;
+    ::strncpy(data.buffer, package.buffer, package.size);
     return data;
 }

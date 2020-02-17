@@ -85,12 +85,12 @@ void            ServerSocket::addClient() {
 }
 
 void            ServerSocket::receiveClient(fd_set value) {
-    std::string data;
+    t_package   data;
 
     for (ClientSocket *ptr : this->_clients) {
         if (*ptr == &value) {
             data << *ptr;
-            if (data.empty())
+            if (data.size <= 0)
                 this->disconnectClient(ptr);
             else
                 this->actionClient(ptr, data);

@@ -33,8 +33,8 @@ void                    ServerHFPService::onClientConnect(ClientSocket *client) 
     this->sendSupportedFeatures(client);
 }
 
-void                    ServerHFPService::actionClient(ClientSocket *client, std::string data) {
-    this->parseCommand(client, data);
+void                    ServerHFPService::actionClient(ClientSocket *client, t_package &data) {
+    this->parseCommand(client, std::string(data.buffer));
 }
 
 void                    ServerHFPService::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
