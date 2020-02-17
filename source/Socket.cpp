@@ -3,6 +3,7 @@
 //
 
 #include        "Socket.hpp"
+#include <iostream>
 
 Socket::Socket() {}
 
@@ -33,6 +34,7 @@ std::string     Socket::read() const {
     int size;
 
     size = ::read(this->_socket, buffer, MAX_BUFF_SIZE);
+    std::cout << "read " << size << std::endl;
     (void)size;
     return (std::string(buffer));
 }
