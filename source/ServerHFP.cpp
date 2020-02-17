@@ -19,7 +19,7 @@ void                        ServerHFP::start() {
 
 void                        ServerHFP::listen() {
     std::thread threadService = std::thread(&ServerHFPService::listen, &this->_serviceServer);
-    std::thread threadAudio = std::thread(&ServerSCO::listen, &this->_serviceServer);
+    std::thread threadAudio = std::thread(&ServerSCO::listen, &this->_audioServer);
     this->_serviceListenThread = threadService.native_handle();
     this->_audioListenThread = threadAudio.native_handle();
     threadService.detach();
