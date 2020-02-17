@@ -1,34 +1,29 @@
 //
-// Created by Gaëtan Léandre on 30/01/2020.
+// Created by Gaëtan Léandre on 16/02/2020.
 //
 
-#ifndef                     HANDS_FREE_SERVERBLUETOOTH_HPP
-#define                     HANDS_FREE_SERVERBLUETOOTH_HPP
+#ifndef                         HANDS_FREE_SERVERBLUETOOTH_HPP
+#define                         HANDS_FREE_SERVERBLUETOOTH_HPP
 
-#include                    <bluetooth/bluetooth.h>
-#include                    <bluetooth/rfcomm.h>
-#include                    <bluetooth/hci.h>
-#include                    <bluetooth/hci_lib.h>
-#include                    <arpa/inet.h>
-#include                    "ServerSocket.hpp"
+#include                        <bluetooth/bluetooth.h>
+#include                        <bluetooth/hci.h>
+#include                        <bluetooth/hci_lib.h>
+#include                        "ServerSocket.hpp"
 
-typedef struct sockaddr_rc  SOCKADDR_RC;
-typedef struct sockaddr     SOCKADDR;
+typedef struct sockaddr         SOCKADDR;
 
-class                       ServerBluetooth : public ServerSocket {
-    uint8_t                 _channel;
-
+class                           ServerBluetooth: public ServerSocket {
 public:
-    ServerBluetooth(uint8_t channel = 1, int maxClients = 1);
+    ServerBluetooth(int maxClients = 1);
     ~ServerBluetooth();
-    const std::string       getServerName() const;
+    virtual const std::string   getServerName() const;
 
 protected:
-    virtual void            socket();
-    virtual int             bind() const;
-    virtual ClientSocket    *accept();
-    virtual void            actionClient(ClientSocket *client, std::string data);
+    virtual void                socket() = 0;
+    virtual int                 bind() const = 0;
+    virtual ClientSocket        *accept() = 0;
+    virtual void                actionClient(ClientSocket *client, std::string data) = 0;
 };
 
 
-#endif //HANDS_FREE_SERVERBLUETOOTH_HPP
+#endif                          //HANDS_FREE_SERVERBLUETOOTH_HPP

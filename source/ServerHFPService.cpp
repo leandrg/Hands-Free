@@ -2,68 +2,68 @@
 // Created by Gaëtan Léandre on 03/02/2020.
 //
 
-#include                "ServerHFP.hpp"
+#include                "ServerHFPService.hpp"
 
-ServerHFP::ServerHFP(uint8_t channel) : ServerBluetooth(channel), SdpHFP() {
+ServerHFPService::ServerHFPService(uint8_t channel) : ServerRFCOMM(channel), SdpHFP() {
     this->registerRecord(channel);
-    this->addCommand(*this, HFP_COMMAND_SUCCESS, &ServerHFP::onSuccess);
-    this->addCommand(*this, HFP_COMMAND_ERROR, &ServerHFP::onError);
-    this->addCommand(*this, HFP_COMMAND_SUPPORTED_FEATURES, &ServerHFP::receiveSupportedFeatures);
-    this->addCommand(*this, HFP_COMMAND_INDICATORS, &ServerHFP::receiveIndicatorsList);
-    this->addCommand(*this, HFP_COMMAND_INDICATOR_VALUE, &ServerHFP::receiveIndicatorValue);
+    this->addCommand(*this, HFP_COMMAND_SUCCESS, &ServerHFPService::onSuccess);
+    this->addCommand(*this, HFP_COMMAND_ERROR, &ServerHFPService::onError);
+    this->addCommand(*this, HFP_COMMAND_SUPPORTED_FEATURES, &ServerHFPService::receiveSupportedFeatures);
+    this->addCommand(*this, HFP_COMMAND_INDICATORS, &ServerHFPService::receiveIndicatorsList);
+    this->addCommand(*this, HFP_COMMAND_INDICATOR_VALUE, &ServerHFPService::receiveIndicatorValue);
 };
 
-ServerHFP::~ServerHFP(){}
+ServerHFPService::~ServerHFPService(){}
 
-void                    ServerHFP::onSuccess(ClientSocket *client, std::string const &str) {
+void                    ServerHFPService::onSuccess(ClientSocket *client, std::string const &str) {
     client->onSuccess(client, str);
 }
 
-void                    ServerHFP::onError(ClientSocket *client, std::string const &str) {
+void                    ServerHFPService::onError(ClientSocket *client, std::string const &str) {
     std::cerr << "Error : " << str << std::endl;
     client->onError(client, str);
 }
 
-ClientSocket            *ServerHFP::createClient(SOCKET newSocket, std::string const &name) {
+ClientSocket            *ServerHFPService::createClient(SOCKET newSocket, std::string const &name) {
     return new ClientHFP(newSocket, name);
 }
 
-void                    ServerHFP::onClientConnect(ClientSocket *client) {
+void                    ServerHFPService::onClientConnect(ClientSocket *client) {
     this->sendSupportedFeatures(client);
 }
 
-void                    ServerHFP::actionClient(ClientSocket *client, std::string data) {
+void                    ServerHFPService::actionClient(ClientSocket *client, std::string data) {
     this->parseCommand(client, data);
 }
 
-void                    ServerHFP::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
+void                    ServerHFPService::sendSupportedFeatures(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_SUPPORTED_FEATURES << "=" << std::to_string(this->_features) << "\n";
-    client->onSuccess(*this, &ServerHFP::sendIndicatorsListQuestion); //TODO ADD CODECS?
+    client->onSuccess(*this, &ServerHFPService::sendIndicatorsListQuestion); //TODO ADD CODECS?
 }
 
-void                    ServerHFP::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question) {
+void                    ServerHFPService::sendIndicatorsListQuestion(ClientSocket *client, std::string const &question) {
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "=" << (question.empty() ? "?" : question) << "\n";
-    client->onSuccess(*this, &ServerHFP::sendIndicatorsValueQuestion);
+    client->onSuccess(*this, &ServerHFPService::sendIndicatorsValueQuestion);
 }
 
-void                    ServerHFP::sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
+void                    ServerHFPService::sendIndicatorsValueQuestion(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_INDICATORS << "?" << "\n";
-    client->onSuccess(*this, &ServerHFP::sendStartListenIndicators);
+    client->onSuccess(*this, &ServerHFPService::sendStartListenIndicators);
 }
 
-void                    ServerHFP::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
+void                    ServerHFPService::sendStartListenIndicators(ClientSocket *client, std::string const &_) {
     (void)_;
     *client << HFP_COMMAND_SEND_BY_HF << HFP_COMMAND_LISTEN_INDICATORS << "=" << "3,0,0,1" "\n";
 }
 
 
-void                    ServerHFP::receiveSupportedFeatures(ClientSocket *client, std::string const &str) {
+void                    ServerHFPService::receiveSupportedFeatures(ClientSocket *client, std::string const &str) {
     ((ClientHFP *)client)->setFeatures(std::stoi(str));
 }
 
-bool                    ServerHFP::containAlpha(std::string const &str) const {
+bool                    ServerHFPService::containAlpha(std::string const &str) const {
     for (auto ch : str) {
         if (std::isalpha(ch))
             return true;
@@ -72,7 +72,7 @@ bool                    ServerHFP::containAlpha(std::string const &str) const {
 }
 
 
-void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, std::string const &str) {
+void                    ServerHFPService::receiveIndicatorsList(ClientSocket *client, std::string const &str) {
     std::string::size_type  pos = 0;
     std::string::size_type  prev = 0;
     int                     parent = 0;
@@ -107,7 +107,7 @@ void                    ServerHFP::receiveIndicatorsList(ClientSocket *client, s
     }
 }
 
-void                    ServerHFP::receiveIndicatorValue(ClientSocket *client, std::string const &str) {
+void                    ServerHFPService::receiveIndicatorValue(ClientSocket *client, std::string const &str) {
     std::vector<std::string> vectorStr = this->split(str, ",");
     std::vector<int> vectorInt;
 

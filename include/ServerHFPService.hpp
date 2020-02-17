@@ -2,23 +2,23 @@
 // Created by Gaëtan Léandre on 03/02/2020.
 //
 
-#ifndef                     HANDS_FREE_SERVERHFP_HPP
-#define                     HANDS_FREE_SERVERHFP_HPP
+#ifndef                     HANDS_FREE_SERVERHFPSERVICE_HPP
+#define                     HANDS_FREE_SERVERHFPSERVICE_HPP
 
-#include                    "ServerBluetooth.hpp"
+#include                    "ServerRFCOMM.hpp"
 #include                    "SdpHFP.hpp"
 #include                    "ClientHFP.hpp"
 #include                    "IndicatorHFP.hpp"
 #include                    "HFPDefine.hpp"
 
-class ServerHFP : public ServerBluetooth, protected SdpHFP {
+class ServerHFPService : public ServerRFCOMM, protected SdpHFP {
     int                     _features = 0;
 
     bool                    containAlpha(std::string const &str) const;
 
 public:
-    ServerHFP(uint8_t channel = 1);
-    ~ServerHFP();
+    ServerHFPService(uint8_t channel = 1);
+    ~ServerHFPService();
     void                    onSuccess(ClientSocket *client, std::string const &str);
     void                    onError(ClientSocket *client, std::string const &str);
 
@@ -39,4 +39,4 @@ protected:
 };
 
 
-#endif                      //HANDS_FREE_SERVERHFP_HPP
+#endif                      //HANDS_FREE_SERVERHFPSERVICE_HPP
